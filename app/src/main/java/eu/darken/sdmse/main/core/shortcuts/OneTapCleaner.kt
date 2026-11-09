@@ -7,7 +7,7 @@ import eu.darken.sdmse.common.debug.logging.Logging.Priority.INFO
 import eu.darken.sdmse.common.debug.logging.log
 import eu.darken.sdmse.common.debug.logging.logTag
 import eu.darken.sdmse.common.upgrade.UpgradeRepo
-import eu.darken.sdmse.common.upgrade.isProForUi
+// import eu.darken.sdmse.common.upgrade.isProForUi
 import eu.darken.sdmse.corpsefinder.core.tasks.CorpseFinderOneClickTask
 import eu.darken.sdmse.corpsefinder.core.tasks.CorpseFinderScanTask
 import eu.darken.sdmse.deduplicator.core.tasks.DeduplicatorOneClickTask
