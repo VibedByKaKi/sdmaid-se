@@ -29,6 +29,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -198,6 +199,7 @@ class AppJunkDetailsViewModelTest : BaseTest() {
         h.vm.state.first().target shouldBe b.identifier
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `requestDelete navs to upgrade when not pro`() = runTest2 {
         val a = junk("com.example.a")

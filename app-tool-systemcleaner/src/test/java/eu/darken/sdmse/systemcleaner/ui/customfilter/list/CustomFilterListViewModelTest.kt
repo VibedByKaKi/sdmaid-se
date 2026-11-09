@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -134,6 +135,7 @@ class CustomFilterListViewModelTest : BaseTest() {
         coVerify(atLeast = 1) { h.enabledFilterValue.update(any()) }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `onEditClick when not pro navigates to UpgradeRoute`() = runTest2 {
         val a = config("a", "A")
@@ -162,6 +164,7 @@ class CustomFilterListViewModelTest : BaseTest() {
         dest.identifier shouldBe "a"
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `onCreateClick when not pro navigates to UpgradeRoute`() = runTest2 {
         val h = buildHarness(isPro = false)
@@ -219,6 +222,7 @@ class CustomFilterListViewModelTest : BaseTest() {
         coVerify(exactly = 1) { h.repo.save(setOf(a)) }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `exportRows when not pro navigates to UpgradeRoute`() = runTest2 {
         val a = config("a", "A")

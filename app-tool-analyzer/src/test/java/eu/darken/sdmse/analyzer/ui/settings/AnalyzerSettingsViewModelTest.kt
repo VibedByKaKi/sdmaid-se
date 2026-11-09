@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -167,6 +168,7 @@ class AnalyzerSettingsViewModelTest : BaseTest() {
         state.isPro shouldBe true
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `a non-Pro user sees the stored value but the row renders unchecked`() = runTest2 {
         // The screen renders `isPro && notificationEnabled`, so the stored value stays intact.
@@ -191,6 +193,7 @@ class AnalyzerSettingsViewModelTest : BaseTest() {
         captured.captured(false) shouldBe true
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `a non-Pro user cannot enable the warning`() = runTest2 {
         val h = harness(notificationEnabled = false, isPro = false)

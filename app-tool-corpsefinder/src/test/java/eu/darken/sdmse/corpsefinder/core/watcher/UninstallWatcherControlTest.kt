@@ -19,6 +19,7 @@ import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runCurrent
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -206,6 +207,7 @@ class UninstallWatcherControlTest : BaseTest() {
         verify(exactly = 0) { h.packageManager.setComponentEnabledSetting(any(), any(), any()) }
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `an enabled component is disabled for a confirmed non-pro user`() = runTest2 {
         val h = harness(

@@ -20,6 +20,7 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
 import testhelpers.compose.BaseComposeRobolectricTest
 
@@ -102,6 +103,7 @@ class DashboardLockedMainActionTest : BaseComposeRobolectricTest() {
         composeRule.waitForIdle()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `the main action upsells instead of deleting when everything is locked`() {
         var mainActions = 0

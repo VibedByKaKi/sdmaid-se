@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -72,6 +73,7 @@ class DeviceStorageViewModelTest : BaseTest() {
         return Harness(vm, dismissed, webpageTool)
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `the hint shows for a non-Pro user who has not dismissed it`() = runTest2 {
         val h = harness(isPro = false, hintDismissed = false)

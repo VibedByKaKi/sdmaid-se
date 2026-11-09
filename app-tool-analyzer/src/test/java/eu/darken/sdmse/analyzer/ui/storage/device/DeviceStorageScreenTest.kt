@@ -12,6 +12,7 @@ import eu.darken.sdmse.common.compose.tour.LocalGuidedTourController
 import io.mockk.mockk
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
 import testhelpers.compose.BaseComposeRobolectricTest
 
@@ -40,6 +41,7 @@ class DeviceStorageScreenTest : BaseComposeRobolectricTest() {
         }
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `the low space hint renders when not Pro and not dismissed`() {
         composeRule.setStorageScreen(DeviceStorageViewModel.State(showLowSpaceHint = true))

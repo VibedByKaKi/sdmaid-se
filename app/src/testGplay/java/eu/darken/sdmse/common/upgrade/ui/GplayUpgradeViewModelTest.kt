@@ -39,6 +39,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -1054,6 +1055,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         loaded.await().grace.shouldNotBeNull().showDiagnostics shouldBe true
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `plain non-pro users get no grace hint`() = runTest2(context = testDispatcher) {
         val repo = mockRepo()

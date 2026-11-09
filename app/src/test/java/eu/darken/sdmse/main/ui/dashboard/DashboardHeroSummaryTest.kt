@@ -11,6 +11,7 @@ import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import java.time.Instant
@@ -84,6 +85,7 @@ class DashboardHeroSummaryTest : BaseTest() {
         )
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `AppCleaner is excluded when not Pro`() {
         val result = DashboardMainActionEngine.buildHeroSummary(
@@ -150,6 +152,7 @@ class DashboardHeroSummaryTest : BaseTest() {
         result.tools.map { it.type } shouldBe listOf(SDMTool.Type.DEDUPLICATOR)
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `Deduplicator is excluded when not Pro`() {
         // The DELETE branch of mainAction only deletes dedupe data for Pro users, so a non-Pro
@@ -203,6 +206,7 @@ class DashboardHeroSummaryTest : BaseTest() {
         ).shouldBeNull()
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `a non-Pro user's only findings become a LOCKED_ONLY summary`() {
         // AppCleaner has data but the user is not Pro, and it is the only tool with data. The
@@ -293,6 +297,7 @@ class DashboardHeroSummaryTest : BaseTest() {
         ).shouldBeNull()
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `a LOCKED_ONLY timestamp comes from the locked tools' scans`() {
         val older = Instant.parse("2026-06-10T10:00:00Z")

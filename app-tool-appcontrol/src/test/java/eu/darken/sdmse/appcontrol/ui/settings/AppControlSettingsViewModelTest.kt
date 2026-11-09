@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -163,6 +164,7 @@ class AppControlSettingsViewModelTest : BaseTest() {
         state.canIncludeMultiUser shouldBe true
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `state reflects non-pro with no setup capabilities`() = runTest2 {
         val state = harness(
@@ -230,6 +232,7 @@ class AppControlSettingsViewModelTest : BaseTest() {
         captured.captured(false) shouldBe true
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `setMultiUserEnabled is blocked when user is not Pro`() = runTest2 {
         // Defence-in-depth: even if the UI exposes the toggle, the VM must refuse to write the
@@ -274,6 +277,7 @@ class AppControlSettingsViewModelTest : BaseTest() {
         route.options?.typeFilter shouldBe setOf(SetupModule.Type.USAGE_STATS)
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `onMultiUserBadgeClick routes to UpgradeRoute when user is not Pro`() = runTest2 {
         val h = harness(isPro = false)

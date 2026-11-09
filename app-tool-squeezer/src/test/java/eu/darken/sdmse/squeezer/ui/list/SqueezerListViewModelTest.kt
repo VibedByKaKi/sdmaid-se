@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -284,6 +285,7 @@ class SqueezerListViewModelTest : BaseTest() {
         event.result shouldBe processSuccess
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `compress confirmed when not pro navigates to UpgradeRoute and does not submit`() = runTest2 {
         val a = image("a.jpg")

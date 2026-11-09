@@ -372,7 +372,7 @@ class RecorderModuleTest : BaseTest() {
         }
 
         @Test
-        fun `a recording at the threshold stops without prompting`() = runTest {
+    fun `a recording at the threshold stops without prompting`() = runTest {
             val module = startFreshRecording()
             every { SystemClock.elapsedRealtime() } returns RECORDING_START + 10_000L
 
@@ -399,7 +399,7 @@ class RecorderModuleTest : BaseTest() {
         }
 
         @Test
-        fun `a resumed session older than the threshold stops without prompting`() = runTest {
+    fun `a resumed session older than the threshold stops without prompting`() = runTest {
             val module = startResumedRecording()
             stubLogDirAge(Duration.ofMinutes(5))
 

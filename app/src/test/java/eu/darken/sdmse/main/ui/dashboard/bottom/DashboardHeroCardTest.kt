@@ -35,6 +35,7 @@ import eu.darken.sdmse.main.core.SDMTool
 import io.kotest.matchers.shouldBe
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Ignore
 import org.junit.Test
 import org.robolectric.annotation.Config
 import testhelpers.compose.BaseComposeRobolectricTest
@@ -605,6 +606,7 @@ class DashboardHeroCardTest : BaseComposeRobolectricTest() {
         }
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `the locked-only hero headlines the locked size and shows no freeable chips`() {
         val locked = lockedOnly()
@@ -623,6 +625,7 @@ class DashboardHeroCardTest : BaseComposeRobolectricTest() {
         ).assertDoesNotExist()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `tapping the upsell line opens the upgrade screen`() {
         var upgrades = 0
@@ -654,6 +657,7 @@ class DashboardHeroCardTest : BaseComposeRobolectricTest() {
         composeRule.onNodeWithText(blockCaption).assertDoesNotExist()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a locked-only hero renders flat, without the nested block`() {
         val locked = lockedOnly()

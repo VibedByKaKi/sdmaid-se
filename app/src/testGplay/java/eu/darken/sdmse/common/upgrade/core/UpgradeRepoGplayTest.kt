@@ -43,6 +43,7 @@ import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.runTest2
@@ -195,6 +196,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         outcome.info.pendingSkus shouldBe listOf(OurSku.Iap.PRO_UPGRADE)
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test fun `a restore that only finds a pending payment reports it without pro`() = runTest2 {
         coEvery { billingManager.refresh() } returns BillingData(emptySet(), setOf(pendingPurchase()))
 
@@ -278,6 +280,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         repo(lastProAt = System.currentTimeMillis() - 1_000).restorePurchaseNow().info.isPro shouldBe true
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test fun `restore is not pro when the query is empty and grace has expired`() = runTest2 {
         coEvery { billingManager.refresh() } returns BillingData(emptySet())
 
@@ -780,6 +783,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         repo(lastProAt = System.currentTimeMillis() - 1_000).restorePurchaseNow().info.isPro shouldBe true
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test fun `unknown-only purchases without recent grace are not pro`() = runTest2 {
         val unknown = mockk<Purchase>().apply {
             every { products } returns listOf("some.unknown.product")

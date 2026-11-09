@@ -13,6 +13,7 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Rule
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -53,6 +54,7 @@ class FossUpgradeScreenHostTest : BaseTest() {
         upgradeRepo = repo,
     )
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a stop-resume round-trip after a sponsor launch runs the return check`() {
         val repo = mockRepo()
@@ -79,6 +81,7 @@ class FossUpgradeScreenHostTest : BaseTest() {
         vm.hasPendingSponsorLaunch() shouldBe false
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a recreated screen consumes the pending sponsor launch on the first resume`() {
         // Process death while the browser was in front: the fresh screen's tracker never saw the

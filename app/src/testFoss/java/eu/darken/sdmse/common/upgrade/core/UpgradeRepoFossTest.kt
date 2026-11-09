@@ -23,6 +23,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import java.io.IOException
@@ -60,6 +61,7 @@ class UpgradeRepoFossTest : BaseTest() {
         webpageTool = mockk(),
     )
 
+    @Disabled("Locks disabled in this fork")
     @Test fun `test upgrade info pro status mapping`() {
         UpgradeRepoFoss.Info(
             isPro = false,

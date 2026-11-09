@@ -14,6 +14,7 @@ import androidx.compose.ui.test.performScrollToNode
 import eu.darken.sdmse.common.compose.preview.PreviewWrapper
 import eu.darken.sdmse.common.compose.settings.FeatureGateState
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
 import testhelpers.compose.BaseComposeRobolectricTest
 
@@ -139,6 +140,7 @@ class AppControlSettingsScreenTest : BaseComposeRobolectricTest() {
         }
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `multi-user row routes to badge handler when not Pro`() {
         // The multi-user row uses the upgrade badge for non-Pro users — tapping the row should
@@ -183,6 +185,7 @@ class AppControlSettingsScreenTest : BaseComposeRobolectricTest() {
         changed shouldBe true
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `non-Pro multi-user row renders the switch as unchecked regardless of stored value`() {
         // Production behaviour: even if `multiUserEnabled` is true in storage, the UI must show

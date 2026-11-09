@@ -44,6 +44,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runCurrent
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.runTest2
@@ -513,6 +514,7 @@ internal class DashboardMainActionEngineTest : BaseTest() {
         }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `a non-Pro AppCleaner upsell fires even when an opted-out free tool has data`() {
         // The upsell guard used to test raw CorpseFinder/SystemCleaner data, so an opted-out tool
@@ -1063,6 +1065,7 @@ internal class DashboardMainActionEngineTest : BaseTest() {
         }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `a non-Pro Deduplicator-only scan produces a locked-only hero`() {
         // The case the old DELETE-only hero gate swallowed: without Pro the Deduplicator never arms
@@ -1098,6 +1101,7 @@ internal class DashboardMainActionEngineTest : BaseTest() {
         }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `a zero-result cleanup still reports what stayed locked`() {
         // The cleanup ran on the free tool and freed nothing, while AppCleaner's findings sat there

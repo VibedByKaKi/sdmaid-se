@@ -3,6 +3,7 @@ package eu.darken.sdmse.stats.core
 import eu.darken.sdmse.stats.core.forecast.StorageForecast
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 
@@ -84,6 +85,7 @@ class LowSpaceAlertDeciderTest : BaseTest() {
         decide(enabled = false) shouldBe LowSpaceDecision(LowSpaceAction.Cancel, armedAfter = true)
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `a non-Pro user cancels and re-arms even in the warning band`() {
         decide(isPro = false) shouldBe LowSpaceDecision(LowSpaceAction.Cancel, armedAfter = true)
@@ -97,6 +99,7 @@ class LowSpaceAlertDeciderTest : BaseTest() {
                 LowSpaceDecision(LowSpaceAction.Cancel, armedAfter = true)
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `recovery while non-Pro re-arms`() {
         decide(isPro = false, armed = false, forecast = StorageForecast.Stable) shouldBe
