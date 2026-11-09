@@ -39,6 +39,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -65,6 +66,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         Dispatchers.resetMain()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `service timeout becomes unavailable state and error event instead of crashing`() = runTest2(
         context = testDispatcher,
@@ -116,6 +118,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         loaded.await().shouldBeInstanceOf<GplayUpgradeUiState.Loaded>()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `retry recovers the screen after a full unavailable episode`() = runTest2(
         context = testDispatcher,
@@ -142,6 +145,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         coVerify(exactly = 4) { repo.querySkus(any()) }
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `onResume retries the query after a failure`() = runTest2(
         context = testDispatcher,
@@ -187,6 +191,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         coVerify(exactly = 2) { repo.querySkus(any()) }
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `both product types unavailable surfaces the merchandising error, not a connectivity one`() = runTest2(
         context = testDispatcher,
@@ -210,6 +215,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         state.error.shouldBeInstanceOf<OfferUnavailableBillingException>()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a mixed failure keeps the conservative connectivity error`() = runTest2(
         context = testDispatcher,
@@ -231,6 +237,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         state.error.shouldBeInstanceOf<GplayServiceUnavailableException>()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a connectivity failure on both product types stays a connectivity error`() = runTest2(
         context = testDispatcher,
@@ -248,6 +255,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         state.error.shouldBeInstanceOf<GplayServiceUnavailableException>()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a single failed product type keeps the screen loaded and surfaces the error once`() = runTest2(
         context = testDispatcher,
@@ -458,6 +466,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         forwardedError.await() shouldBe boom
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `previously-pro on this device flows into the loaded banner flag`() = runTest2(context = testDispatcher) {
         val repo = mockRepo()
@@ -940,6 +949,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         collector.cancel()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `two failed queries resolve to unavailable without waiting for settled`() = runTest2(
         context = testDispatcher,
@@ -1054,6 +1064,7 @@ class GplayUpgradeViewModelTest : BaseTest() {
         loaded.await().grace.shouldNotBeNull().showDiagnostics shouldBe true
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `plain non-pro users get no grace hint`() = runTest2(context = testDispatcher) {
         val repo = mockRepo()

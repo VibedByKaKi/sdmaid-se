@@ -15,6 +15,7 @@ import eu.darken.sdmse.common.R as CommonR
 import eu.darken.sdmse.common.compose.preview.PreviewWrapper
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Ignore
 import org.junit.Test
 import testhelpers.compose.BaseComposeRobolectricTest
 import java.time.Instant
@@ -63,6 +64,7 @@ class FossUpgradeScreenTest : BaseComposeRobolectricTest() {
         }
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `free status view shows the status without any pitch content`() {
         composeRule.setUpgradeContent {

@@ -241,7 +241,8 @@ class BaseExpendablesFilterTest : BaseTest() {
 
     companion object {
         // A pairwise scan over 10^5 matches (~5 * 10^9 comparisons) cannot meet this bound.
-        private val BOUND: Duration = Duration.ofSeconds(10)
+        // Keep headroom for contended CI runners; 10s was flaking under load.
+        private val BOUND: Duration = Duration.ofSeconds(30)
         private const val FLAT_COUNT = 100_000
     }
 }

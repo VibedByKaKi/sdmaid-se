@@ -46,8 +46,10 @@ class UpgradeRepoFoss @Inject constructor(
         .flatMapLatest {
             fossCache.upgrade.flow
                 .map { data ->
+                    // Locks disabled: Pro features are always unlocked in this fork.
                     if (data == null) {
-                        Info()
+                        // Info()
+                        Info(isPro = true)
                     } else {
                         Info(
                             isPro = true,
@@ -124,7 +126,9 @@ class UpgradeRepoFoss @Inject constructor(
     }
 
     data class Info(
-        override val isPro: Boolean = false,
+        // Locks disabled: default to unlocked.
+        // override val isPro: Boolean = false,
+        override val isPro: Boolean = true,
         override val upgradedAt: Instant? = null,
         val fossUpgradeType: FossUpgrade.Type? = null,
         override val error: Throwable? = null,

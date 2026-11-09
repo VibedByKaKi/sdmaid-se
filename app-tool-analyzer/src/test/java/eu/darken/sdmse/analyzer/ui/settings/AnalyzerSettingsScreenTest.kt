@@ -9,6 +9,7 @@ import androidx.compose.ui.test.performClick
 import eu.darken.sdmse.common.compose.preview.PreviewWrapper
 import eu.darken.sdmse.stats.core.LowStorage
 import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
 import testhelpers.compose.BaseComposeRobolectricTest
 
@@ -145,6 +146,7 @@ class AnalyzerSettingsScreenTest : BaseComposeRobolectricTest() {
         composeRule.onNodeWithText("Low space warning").assertExists()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a non-Pro tap opens the upgrade flow instead of toggling`() {
         var toggles = 0

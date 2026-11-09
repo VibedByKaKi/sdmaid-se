@@ -31,6 +31,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -85,6 +86,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         upgradeRepo = repo,
     )
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `manage route shows the free status to non-upgraded users`() = runTest2(context = testDispatcher) {
         val vm = buildVm()
@@ -123,6 +125,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         )
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `default and forced routes show the pitch`() = runTest2(context = testDispatcher) {
         val defaultVm = buildVm()
@@ -138,6 +141,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         forcedView.await().view shouldBe FossUpgradeView.PITCH
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `asking for upgrade options switches the free status to the pitch`() = runTest2(context = testDispatcher) {
         val vm = buildVm()
@@ -154,6 +158,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         pitchView.await().view shouldBe FossUpgradeView.PITCH
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `the upgrade-options choice survives process recreation`() = runTest2(context = testDispatcher) {
         val handle = SavedStateHandle()
@@ -171,6 +176,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         view.await().view shouldBe FossUpgradeView.PITCH
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `completing the upgrade lands on the upgraded status even from the pitch`() = runTest2(
         context = testDispatcher,
@@ -191,6 +197,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         upgradedView.await().view shouldBe FossUpgradeView.STATUS_UPGRADED
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `forced route lands on the upgraded status when the sponsor flow completes`() = runTest2(
         context = testDispatcher,
@@ -248,6 +255,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         collector.cancel()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a too-quick sponsor return only nudges, it does not upgrade`() = runTest2(context = testDispatcher) {
         val repo = mockRepo()
@@ -281,6 +289,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         collector.cancel()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a sponsor return after the delay persists the upgrade`() = runTest2(context = testDispatcher) {
         val repo = mockRepo()
@@ -301,6 +310,7 @@ class FossUpgradeViewModelTest : BaseTest() {
      * tracker is gone, so the handle-backed pending launch has to carry the state across. Without
      * it the very first return after a recreation is dropped and the supporter never gets unlocked.
      */
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a sponsor return after process recreation still persists the upgrade`() = runTest2(
         context = testDispatcher,
@@ -354,6 +364,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         toastCollector.cancel()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a sponsor return whose record already existed stays quiet`() = runTest2(context = testDispatcher) {
         // The isPro fast path reads a shareIn replay that can be stale, so a supporter's return can
@@ -385,6 +396,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         toastCollector.cancel()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a failed persist restores the pending sponsor launch`() = runTest2(context = testDispatcher) {
         // The marker is consumed before the write. If the write then fails, dropping it would eat a
@@ -468,6 +480,7 @@ class FossUpgradeViewModelTest : BaseTest() {
         coVerify(exactly = 0) { repo.persistUpgrade() }
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `a newer sponsor launch survives a failed older attempt`() = runTest2(context = testDispatcher) {
         // The restore must not clobber a launch armed while the old attempt was still suspended:

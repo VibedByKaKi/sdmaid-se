@@ -19,6 +19,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.runTest2
@@ -75,6 +76,7 @@ class SwiperTest : BaseTest() {
         coVerify(exactly = 1) { dao.insert(any()) }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `free user at the session limit is refused`() = runTest2 {
         val (swiper, dao) = create(
@@ -116,6 +118,7 @@ class SwiperTest : BaseTest() {
         coVerify(exactly = 1) { dao.insert(any()) }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `session limit applies when billing never settles`() = runTest2 {
         val (swiper, dao) = create(

@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceUntilIdle
 import org.junit.After
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -121,6 +122,7 @@ class AnniversaryProviderTest : BaseTest() {
         ).shouldBeNull()
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test fun `non-pro users never see the card`() = runTest2 {
         val installedAt = instantOf(LocalDate.of(2024, 12, 20))
         stub(dismissedOrdinal = null, installedAt = installedAt, isPro = false)

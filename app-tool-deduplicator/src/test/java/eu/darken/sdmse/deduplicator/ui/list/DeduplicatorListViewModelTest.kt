@@ -41,6 +41,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -829,6 +830,7 @@ class DeduplicatorListViewModelTest : BaseTest() {
         coVerify(exactly = 0) { h.taskSubmitter.submit(any()) }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `deleteClusters confirmed without pro navigates to upgrade and does NOT submit`() = runTest2 {
         val c = cluster("a")

@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.runTest2
@@ -246,6 +247,7 @@ class LowSpaceMonitorTest : BaseTest() {
         h.armed.value() shouldBe true
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `a non-Pro user cancels and re-arms`() = runTest2 {
         val h = harness(isPro = false, armed = false, primary = reading())
@@ -274,6 +276,7 @@ class LowSpaceMonitorTest : BaseTest() {
 
     // ─────────────────────────── the observer ───────────────────────────
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `an unsettled entitlement is not treated as non-Pro, and acts once it settles`() = runTest2 {
         // The GPlay pre-billing seed reports non-Pro even for paying users, so cancelling on it

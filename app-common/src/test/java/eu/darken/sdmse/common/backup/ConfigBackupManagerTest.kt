@@ -16,6 +16,7 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import testhelpers.BaseTest
@@ -156,6 +157,7 @@ class ConfigBackupManagerTest : BaseTest() {
         return zip
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `writeBackup is denied for non-pro users`(@TempDir tmp: Path) = runTest {
         shouldThrow<UpgradeRequiredException> {

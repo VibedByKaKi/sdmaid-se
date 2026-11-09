@@ -10,8 +10,8 @@ import eu.darken.sdmse.common.debug.logging.log
 import eu.darken.sdmse.common.debug.logging.logTag
 import eu.darken.sdmse.common.error.HasLocalizedError
 import eu.darken.sdmse.common.upgrade.UpgradeRepo
-import eu.darken.sdmse.common.upgrade.UpgradeRequiredException
-import eu.darken.sdmse.common.upgrade.isProSettled
+// import eu.darken.sdmse.common.upgrade.UpgradeRequiredException
+// import eu.darken.sdmse.common.upgrade.isProSettled
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
@@ -42,7 +42,7 @@ class ConfigBackupManager @Inject constructor(
     private val sectionContributors: Set<@JvmSuppressWildcards ConfigBackupContributor>,
     private val databaseContributors: Set<@JvmSuppressWildcards DatabaseBackupContributor>,
     private val json: Json,
-    private val upgradeRepo: UpgradeRepo,
+    @Suppress("unused") private val upgradeRepo: UpgradeRepo,
     private val envelopeSource: BackupEnvelopeSource,
     private val gate: BackupOperationGate,
     private val limits: BackupLimits,
@@ -68,10 +68,11 @@ class ConfigBackupManager @Inject constructor(
      * the returned [WriteResult] so callers can surface a partial backup instead of a false success.
      */
     suspend fun writeBackup(out: OutputStream): WriteResult = gate.runExclusive {
-        if (!upgradeRepo.isProSettled()) {
-            log(TAG, WARN) { "writeBackup() denied, Pro upgrade required" }
-            throw UpgradeRequiredException()
-        }
+        // Locks disabled: Pro gate commented out in this fork.
+        // if (!upgradeRepo.isProSettled()) {
+        //     log(TAG, WARN) { "writeBackup() denied, Pro upgrade required" }
+        //     throw UpgradeRequiredException()
+        // }
         writeArchive(out)
     }
 

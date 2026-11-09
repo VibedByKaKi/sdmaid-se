@@ -54,6 +54,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -731,6 +732,7 @@ class AppControlListViewModelTest : BaseTest() {
         coVerify(exactly = 1) { h.taskSubmitter.submit(expectedTask) }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `onForceStopRequested with multi-select on free tier navigates to upgrade`() = runTest2 {
         // Multi-select force-stop is a Pro feature. Free users must hit the upgrade route
@@ -753,6 +755,7 @@ class AppControlListViewModelTest : BaseTest() {
         collected.cancel()
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `onForceStopRequested with single target on free tier emits ConfirmForceStop`() = runTest2 {
         // Single-target is allowed for free users.

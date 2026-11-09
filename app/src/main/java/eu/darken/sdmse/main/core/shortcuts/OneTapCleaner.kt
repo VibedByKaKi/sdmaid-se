@@ -7,7 +7,7 @@ import eu.darken.sdmse.common.debug.logging.Logging.Priority.INFO
 import eu.darken.sdmse.common.debug.logging.log
 import eu.darken.sdmse.common.debug.logging.logTag
 import eu.darken.sdmse.common.upgrade.UpgradeRepo
-import eu.darken.sdmse.common.upgrade.isProForUi
+// import eu.darken.sdmse.common.upgrade.isProForUi
 import eu.darken.sdmse.corpsefinder.core.tasks.CorpseFinderOneClickTask
 import eu.darken.sdmse.corpsefinder.core.tasks.CorpseFinderScanTask
 import eu.darken.sdmse.deduplicator.core.tasks.DeduplicatorOneClickTask
@@ -63,10 +63,11 @@ class OneTapCleaner @Inject constructor(
      * hint at the right moment. Suspends until the whole sequence completes.
      */
     suspend fun runOneClick(shortcutMode: Boolean, onStarted: suspend () -> Unit = {}): Outcome {
-        if (!upgradeRepo.isProForUi()) {
-            log(TAG, INFO) { "runOneClick(): requires Pro" }
-            return Outcome.NotPro
-        }
+        // Locks disabled: Pro gate commented out in this fork.
+        // if (!upgradeRepo.isProForUi()) {
+        //     log(TAG, INFO) { "runOneClick(): requires Pro" }
+        //     return Outcome.NotPro
+        // }
 
         val corpseEnabled = generalSettings.oneClickCorpseFinderEnabled.value()
         val systemEnabled = generalSettings.oneClickSystemCleanerEnabled.value()

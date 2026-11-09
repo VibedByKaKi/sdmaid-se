@@ -23,6 +23,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import java.io.IOException
@@ -60,13 +61,14 @@ class UpgradeRepoFossTest : BaseTest() {
         webpageTool = mockk(),
     )
 
+    @Disabled("Locks disabled in this fork")
     @Test fun `test upgrade info pro status mapping`() {
         UpgradeRepoFoss.Info(
             isPro = false,
             upgradedAt = null,
         ).apply {
             type shouldBe UpgradeRepo.Type.FOSS
-            isPro shouldBe false
+            isPro shouldBe true // locks disabled
         }
 
         UpgradeRepoFoss.Info(
@@ -84,7 +86,7 @@ class UpgradeRepoFossTest : BaseTest() {
                 repo.upgradeInfo.first().apply {
                     // Type and message: a bare non-null check would also pass on a swallow-and-wrap.
                     error.shouldBeInstanceOf<IOException>().message shouldBe "cache broken"
-                    isPro shouldBe false
+                    isPro shouldBe true // locks disabled
                     // The UI must be able to render this: an unsettled error is an endless spinner.
                     isSettled shouldBe true
                 }

@@ -42,6 +42,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -206,6 +207,7 @@ class SwiperSessionsViewModelTest : BaseTest() {
         freeHarness.vm.state.first().isPro shouldBe false
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `state keeps Pro status unknown until a non-Pro entitlement is settled`() = runTest2 {
         val h = harness(isPro = false, isUpgradeSettled = false)
@@ -240,6 +242,7 @@ class SwiperSessionsViewModelTest : BaseTest() {
         h.vm.state.first().canCreateNewSession shouldBe true
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `canCreateNewSession false when free user is at session limit`() = runTest2 {
         val sessions = (1..2).map { sessionWithStats(session = session(id = "s$it")) }
@@ -272,6 +275,7 @@ class SwiperSessionsViewModelTest : BaseTest() {
         nav.cancel()
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `picker result past the session limit redirects to the upgrade screen`() = runTest2 {
         val h = harness()

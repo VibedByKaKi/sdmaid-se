@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -219,6 +220,7 @@ class CorpseFinderSettingsViewModelTest : BaseTest() {
         state.isFilterPrivateDataAvailable shouldBe true
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `setWatcherEnabled is blocked when not pro`() = runTest2 {
         val h = harness(isPro = false)

@@ -23,7 +23,7 @@ import eu.darken.sdmse.common.sharedresource.SharedResource
 import eu.darken.sdmse.common.sharedresource.keepResourceHoldersAlive
 import eu.darken.sdmse.common.upgrade.UpgradeRepo
 import eu.darken.sdmse.common.upgrade.isPro
-import eu.darken.sdmse.common.upgrade.isProForUi
+// import eu.darken.sdmse.common.upgrade.isProForUi
 import eu.darken.sdmse.main.core.SDMTool
 import eu.darken.sdmse.swiper.core.db.SwipeItemDao
 import eu.darken.sdmse.swiper.core.db.SwipeSessionDao
@@ -353,11 +353,12 @@ class Swiper @Inject constructor(
     ): SwiperSessionCreator.Result = toolLock.withLock {
         require(paths.isNotEmpty()) { "Cannot create session with empty paths" }
         log(TAG, INFO) { "createSession(paths=$paths)" }
-        val activeCount = sessionDao.countActiveSessions()
-        if (activeCount >= SwiperSettings.FREE_VERSION_SESSION_LIMIT && !upgradeRepo.isProForUi()) {
-            log(TAG, WARN) { "createSession(): Free session limit reached ($activeCount active)" }
-            return@withLock SwiperSessionCreator.Result.LimitReached
-        }
+        // Locks disabled: free session limit commented out in this fork.
+        // val activeCount = sessionDao.countActiveSessions()
+        // if (activeCount >= SwiperSettings.FREE_VERSION_SESSION_LIMIT && !upgradeRepo.isProForUi()) {
+        //     log(TAG, WARN) { "createSession(): Free session limit reached ($activeCount active)" }
+        //     return@withLock SwiperSessionCreator.Result.LimitReached
+        // }
         val sessionId = java.util.UUID.randomUUID().toString()
         val now = Instant.now()
         val session = SwipeSessionEntity(

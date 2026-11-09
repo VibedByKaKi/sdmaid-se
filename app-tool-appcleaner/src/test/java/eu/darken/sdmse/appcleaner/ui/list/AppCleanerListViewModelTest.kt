@@ -34,6 +34,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import testhelpers.coroutine.TestDispatcherProvider
@@ -248,6 +249,7 @@ class AppCleanerListViewModelTest : BaseTest() {
         event.ids shouldBe setOf(a.identifier)
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `onRowClick navs to upgrade and does not confirm when not pro`() = runTest2 {
         val a = junk("com.example.only")
@@ -265,6 +267,7 @@ class AppCleanerListViewModelTest : BaseTest() {
         collected.cancel()
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `onDeleteSelected navs to upgrade and does not confirm when not pro`() = runTest2 {
         val a = junk("com.example.a")
@@ -317,6 +320,7 @@ class AppCleanerListViewModelTest : BaseTest() {
         coVerify(exactly = 0) { h.taskSubmitter.submit(any()) }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `onDeleteConfirmed navs to upgrade when not pro`() = runTest2 {
         val live = junk("com.example.live")

@@ -20,8 +20,8 @@ import eu.darken.sdmse.common.progress.withProgress
 import eu.darken.sdmse.common.sharedresource.SharedResource
 import eu.darken.sdmse.common.sharedresource.keepResourceHoldersAlive
 import eu.darken.sdmse.common.upgrade.UpgradeRepo
-import eu.darken.sdmse.common.upgrade.UpgradeRequiredException
-import eu.darken.sdmse.common.upgrade.isProSettled
+// import eu.darken.sdmse.common.upgrade.UpgradeRequiredException
+// import eu.darken.sdmse.common.upgrade.isProSettled
 import eu.darken.sdmse.deduplicator.core.arbiter.DuplicatesArbiter
 import eu.darken.sdmse.deduplicator.core.deleter.DuplicatesDeleter
 import eu.darken.sdmse.deduplicator.core.scanner.DuplicatesScanner
@@ -68,7 +68,7 @@ class Deduplicator @Inject constructor(
     private val deleter: Provider<DuplicatesDeleter>,
     private val settings: DeduplicatorSettings,
     private val arbiter: DuplicatesArbiter,
-    private val upgradeRepo: UpgradeRepo,
+    @Suppress("unused") private val upgradeRepo: UpgradeRepo,
 ) : SDMTool, Progress.Client {
 
     override val type: SDMTool.Type = SDMTool.Type.DEDUPLICATOR
@@ -118,13 +118,11 @@ class Deduplicator @Inject constructor(
     override suspend fun submit(task: SDMTool.Task): SDMTool.Task.Result {
         task as DeduplicatorTask
 
-        // Pro gate at the API boundary: defense-in-depth so a UI mistake can't run a Pro-only task
-        // for free. Checked before acquiring toolLock so the (possibly waiting) Pro check never
-        // holds the lock and blocks other submits.
-        if (task.requiresPro && !upgradeRepo.isProSettled()) {
-            log(TAG, WARN) { "submit($task) denied: Pro upgrade required" }
-            throw UpgradeRequiredException(type)
-        }
+        // Locks disabled: Pro gate commented out in this fork.
+        // if (task.requiresPro && !upgradeRepo.isProSettled()) {
+        //     log(TAG, WARN) { "submit($task) denied: Pro upgrade required" }
+        //     throw UpgradeRequiredException(type)
+        // }
 
         return performTask(task)
     }

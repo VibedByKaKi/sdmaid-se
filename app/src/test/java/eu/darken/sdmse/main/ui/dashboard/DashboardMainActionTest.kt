@@ -9,6 +9,7 @@ import eu.darken.sdmse.systemcleaner.core.SystemCleaner
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 
@@ -110,6 +111,7 @@ class DashboardMainActionTest : BaseTest() {
         ) shouldBe BottomBarState.Action.DELETE
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `AppCleaner data arms DELETE without Pro so mainAction can upsell`() {
         resolve(
@@ -147,6 +149,7 @@ class DashboardMainActionTest : BaseTest() {
         ) shouldBe BottomBarState.Action.SCAN
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `dedupe-only data does not arm DELETE for non-Pro users`() {
         // The DELETE branch of mainAction would skip Deduplicator without Pro, so offering the
