@@ -224,7 +224,7 @@ class SwiperSessionsViewModel @Inject constructor(
         val areasUnavailable: Boolean = false,
     ) {
         val canCreateNewSession: Boolean =
-            isPro == true || sessionsWithStats.size < SwiperSettings.FREE_VERSION_SESSION_LIMIT
+            true // locks disabled: isPro == true || sessionsWithStats.size < SwiperSettings.FREE_VERSION_SESSION_LIMIT
         val freeVersionLimit: Int = SwiperSettings.FREE_VERSION_LIMIT
         val freeSessionLimit: Int = SwiperSettings.FREE_VERSION_SESSION_LIMIT
 
