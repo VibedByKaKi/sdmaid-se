@@ -176,16 +176,18 @@ jobs:
             -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
 
       # The test updates the latest release in place to this build. FOSS starts from the published APK.
+      # Forks have no GitHub releases of their own, so always pull the baseline from upstream.
       - name: Download the latest release
         id: release
         env:
           GH_TOKEN: ${{ github.token }}
+          UPSTREAM_REPO: d4rken-org/sdmaid-se
         run: |
-          tag=$(gh release view --repo "$GITHUB_REPOSITORY" --json tagName --jq .tagName)
-          echo "Upgrade test starts from $tag"
+          tag=$(gh release view --repo "$UPSTREAM_REPO" --json tagName --jq .tagName)
+          echo "Upgrade test starts from $UPSTREAM_REPO@$tag"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
           mkdir -p "$RUNNER_TEMP/previous-release"
-          gh release download "$tag" --repo "$GITHUB_REPOSITORY" --pattern '*-FOSS-RELEASE.apk' \
+          gh release download "$tag" --repo "$UPSTREAM_REPO" --pattern '*-FOSS-RELEASE.apk' \
             --output "$RUNNER_TEMP/previous-release/foss.apk"
 
       # gplay is only published through Play, so its previous release is rebuilt from the tag.
@@ -201,7 +203,7 @@ jobs:
         env:
           TAG: ${{ steps.release.outputs.tag }}
         run: |
-          git fetch --no-tags --depth=1 origin "refs/tags/$TAG:refs/tags/$TAG"
+          git fetch --no-tags --depth=1 https://github.com/d4rken-org/sdmaid-se.git "refs/tags/$TAG:refs/tags/$TAG"
           git worktree add --detach "$RUNNER_TEMP/upgrade-base" "$TAG"
           cd "$RUNNER_TEMP/upgrade-base"
           chmod +x gradlew
