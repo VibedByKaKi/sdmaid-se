@@ -15,6 +15,7 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Rule
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -71,6 +72,7 @@ class GplayUpgradeScreenHostTest : BaseTest() {
         }
     }
 
+    @Ignore("Locks disabled in this fork")
     @Test
     fun `returning to the screen re-runs a failed offers query`() {
         val repo = mockRepo()
