@@ -63,10 +63,11 @@ class OneTapCleaner @Inject constructor(
      * hint at the right moment. Suspends until the whole sequence completes.
      */
     suspend fun runOneClick(shortcutMode: Boolean, onStarted: suspend () -> Unit = {}): Outcome {
-        if (!upgradeRepo.isProForUi()) {
-            log(TAG, INFO) { "runOneClick(): requires Pro" }
-            return Outcome.NotPro
-        }
+        // Locks disabled: Pro gate commented out in this fork.
+        // if (!upgradeRepo.isProForUi()) {
+        //     log(TAG, INFO) { "runOneClick(): requires Pro" }
+        //     return Outcome.NotPro
+        // }
 
         val corpseEnabled = generalSettings.oneClickCorpseFinderEnabled.value()
         val systemEnabled = generalSettings.oneClickSystemCleanerEnabled.value()

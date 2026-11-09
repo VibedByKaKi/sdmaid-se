@@ -69,6 +69,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.plus
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertTimeoutPreemptively
 import testhelpers.BaseTest
@@ -599,6 +600,7 @@ class AppCleanerTest : BaseTest() {
 
     // ─────────────────────────── Pro gating ───────────────────────────
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `submit ProcessingTask is denied with UpgradeRequiredException when not Pro`() = runTest2 {
         val setup = setupCleaner(isPro = false)

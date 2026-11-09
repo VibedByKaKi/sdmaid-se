@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import okio.ByteString
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 import javax.inject.Provider
@@ -348,6 +349,7 @@ class DeduplicatorTest : BaseTest() {
 
     // ─────────────────────────── Pro gating ───────────────────────────
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `submit DeleteTask is denied with UpgradeRequiredException when not Pro`() = runTest {
         // The scanner/deleter providers error() if touched, so an UpgradeRequiredException proves
@@ -358,6 +360,7 @@ class DeduplicatorTest : BaseTest() {
         }
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `submit OneClickTask is denied with UpgradeRequiredException when not Pro`() = runTest {
         val dedup = buildDeduplicator(isPro = false)

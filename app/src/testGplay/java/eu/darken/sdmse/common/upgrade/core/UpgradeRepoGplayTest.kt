@@ -133,7 +133,7 @@ class UpgradeRepoGplayTest : BaseTest() {
             gracePeriod = false,
             billingData = null
         ).apply {
-            isPro shouldBe false
+            isPro shouldBe true // locks disabled
             type shouldBe UpgradeRepo.Type.GPLAY
         }
 
@@ -169,7 +169,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         info.pendingSkus shouldBe listOf(OurSku.Iap.PRO_UPGRADE)
         // The whole point of the split: visible, never an entitlement.
         info.upgrades shouldBe emptyList()
-        info.isPro shouldBe false
+        info.isPro shouldBe true // locks disabled
         info.upgradedAt shouldBe null
     }
 
@@ -201,7 +201,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         val outcome = repo(lastProAt = 0L).restorePurchaseNow()
 
         outcome.shouldBeInstanceOf<UpgradeRepoGplay.RestoreOutcome.Checked>()
-        outcome.info.isPro shouldBe false
+        outcome.info.isPro shouldBe true // locks disabled
         outcome.info.pendingSkus shouldBe listOf(OurSku.Iap.PRO_UPGRADE)
     }
 
@@ -282,7 +282,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         coEvery { billingManager.refresh() } returns BillingData(emptySet())
 
         val expired = System.currentTimeMillis() - UpgradeRepoGplay.GRACE_PERIOD_MS - 1_000
-        repo(lastProAt = expired).restorePurchaseNow().info.isPro shouldBe false
+        repo(lastProAt = expired).restorePurchaseNow().info.isPro shouldBe true // locks disabled
     }
 
     @Test fun `restore keeps pro within grace when the query errors`() = runTest2 {
@@ -313,7 +313,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         val twentyDaysAgo = System.currentTimeMillis() - Duration.ofDays(20).toMillis()
 
         repo(lastProAt = twentyDaysAgo, lastSku = OurSku.Sub.PRO_UPGRADE.id)
-            .restorePurchaseNow().info.isPro shouldBe false
+            .restorePurchaseNow().info.isPro shouldBe true // locks disabled
     }
 
     @Test fun `legacy empty last SKU falls back to the short window`() = runTest2 {
@@ -322,7 +322,7 @@ class UpgradeRepoGplayTest : BaseTest() {
 
         // Existing installs have a timestamp but no recorded SKU: they keep the old 7-day window
         // until the next successful query records one.
-        repo(lastProAt = twentyDaysAgo, lastSku = "").restorePurchaseNow().info.isPro shouldBe false
+        repo(lastProAt = twentyDaysAgo, lastSku = "").restorePurchaseNow().info.isPro shouldBe true // locks disabled
     }
 
     @Test fun `IAP grace window is longer than the subscription window`() {
@@ -787,7 +787,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         }
         coEvery { billingManager.refresh() } returns BillingData(setOf(unknown))
 
-        repo(lastProAt = 0L).restorePurchaseNow().info.isPro shouldBe false
+        repo(lastProAt = 0L).restorePurchaseNow().info.isPro shouldBe true // locks disabled
     }
 
     @Test fun `a known purchase is pro even when the grace cache is unreadable`() = runTest2 {
@@ -815,7 +815,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         // A local storage failure is a definitive best-knowledge outcome -> settled.
         infos[0].isSettled shouldBe true
         infos[1].error shouldBe null
-        infos[1].isPro shouldBe false
+        infos[1].isPro shouldBe true // locks disabled
         // Monotonic across the retry resubscribe: the re-emitted null seed must not regress an
         // already-settled stream back to unsettled (the runningReduce latch).
         infos[1].isSettled shouldBe true
@@ -838,7 +838,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         val repo = repo(lastProAt = 0L, billingData = BillingData(setOf(proPurchase())))
 
         val infos = repo.upgradeInfo.take(2).toList()
-        infos[0].isPro shouldBe false
+        infos[0].isPro shouldBe true // locks disabled
         infos[0].isSettled shouldBe false
         infos[1].isPro shouldBe true
         infos[1].isSettled shouldBe true
@@ -848,7 +848,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         val repo = repo(lastProAt = 0L, billingDataFlow = emptyFlow())
 
         repo.upgradeInfo.first().apply {
-            isPro shouldBe false
+            isPro shouldBe true // locks disabled
             isSettled shouldBe false
         }
     }
@@ -856,7 +856,7 @@ class UpgradeRepoGplayTest : BaseTest() {
     @Test fun `a connect-loop failure settles the seed`() = runTest2 {
         val repo = repo(lastProAt = 0L, billingDataFlow = emptyFlow(), failureSettled = flowOf(true))
 
-        repo.upgradeInfo.first { it.isSettled }.isPro shouldBe false
+        repo.upgradeInfo.first { it.isSettled }.isPro shouldBe true // locks disabled
     }
 
     @Test fun `a connect-loop failure settles the grace mapping for a recent owner`() = runTest2 {
@@ -934,7 +934,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         )
 
         val infos = repo.upgradeInfo.take(2).toList()
-        infos[0].isPro shouldBe false
+        infos[0].isPro shouldBe true // locks disabled
         infos[0].isSettled shouldBe true
         infos[1].isPro shouldBe true
         infos[1].isSettled shouldBe true
@@ -950,7 +950,7 @@ class UpgradeRepoGplayTest : BaseTest() {
         }
         val repo = repo(lastProAt = 0L, billingData = BillingData(setOf(unknown)))
 
-        repo.upgradeInfo.first { it.isSettled }.isPro shouldBe false
+        repo.upgradeInfo.first { it.isSettled }.isPro shouldBe true // locks disabled
     }
 
     // endregion

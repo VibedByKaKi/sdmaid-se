@@ -45,8 +45,8 @@ import eu.darken.sdmse.common.sharedresource.SharedResource
 import eu.darken.sdmse.common.sharedresource.keepResourceHoldersAlive
 import eu.darken.sdmse.common.shell.ShellOps
 import eu.darken.sdmse.common.upgrade.UpgradeRepo
-import eu.darken.sdmse.common.upgrade.UpgradeRequiredException
-import eu.darken.sdmse.common.upgrade.isProSettled
+// import eu.darken.sdmse.common.upgrade.UpgradeRequiredException
+// import eu.darken.sdmse.common.upgrade.isProSettled
 import eu.darken.sdmse.exclusion.core.ExclusionManager
 import eu.darken.sdmse.exclusion.core.types.Exclusion
 import eu.darken.sdmse.exclusion.core.types.ExclusionId
@@ -110,7 +110,7 @@ class AppCleaner @Inject constructor(
     private val shellOps: ShellOps,
     private val filterFactories: Set<@JvmSuppressWildcards ExpendablesFilter.Factory>,
     @SetupBinding(SetupModule.Type.INVENTORY) private val appInventorySetupModule: SetupModule,
-    private val upgradeRepo: UpgradeRepo,
+    @Suppress("unused") private val upgradeRepo: UpgradeRepo,
 ) : SDMTool, Progress.Client {
 
     override val sharedResource = SharedResource.createKeepAlive(TAG, appScope)
@@ -153,13 +153,11 @@ class AppCleaner @Inject constructor(
     override suspend fun submit(task: SDMTool.Task): SDMTool.Task.Result {
         task as AppCleanerTask
 
-        // Pro gate at the API boundary: defense-in-depth so a UI mistake can't run a Pro-only task
-        // for free. Checked before acquiring toolLock so the (possibly waiting) Pro check never
-        // holds the lock and blocks other submits.
-        if (task.requiresPro && !upgradeRepo.isProSettled()) {
-            log(TAG, WARN) { "submit() denied, Pro upgrade required: $task" }
-            throw UpgradeRequiredException(type)
-        }
+        // Locks disabled: Pro gate commented out in this fork.
+        // if (task.requiresPro && !upgradeRepo.isProSettled()) {
+        //     log(TAG, WARN) { "submit() denied, Pro upgrade required: $task" }
+        //     throw UpgradeRequiredException(type)
+        // }
 
         return performTask(task)
     }

@@ -628,7 +628,9 @@ class UpgradeRepoGplay @Inject constructor(
         val hasAutoRenewingSubscription: Boolean
             get() = billingData?.purchases?.any { it.isAutoRenewing } == true
 
-        override val isPro: Boolean = upgrades.isNotEmpty() || gracePeriod
+        // Locks disabled: Pro features are always unlocked in this fork.
+        // override val isPro: Boolean = upgrades.isNotEmpty() || gracePeriod
+        override val isPro: Boolean = true
 
         override val upgradedAt: Instant? = upgrades
             .maxByOrNull { it.purchase.purchaseTime }

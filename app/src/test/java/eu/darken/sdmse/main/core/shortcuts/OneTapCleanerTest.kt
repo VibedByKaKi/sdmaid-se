@@ -22,6 +22,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import testhelpers.BaseTest
 
@@ -60,6 +61,7 @@ class OneTapCleanerTest : BaseTest() {
         MockKAnnotations.init(this)
     }
 
+    @Disabled("Locks disabled in this fork")
     @Test
     fun `runOneClick returns NotPro and submits nothing when not Pro`() = runTest {
         setup(pro = false, corpse = true)
